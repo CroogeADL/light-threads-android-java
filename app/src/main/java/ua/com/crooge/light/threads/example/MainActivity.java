@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         LightThreads.runInForeground(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(MainActivity.this, "Enjoy using Light Threads!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Enjoy using LightThreads!", Toast.LENGTH_SHORT).show();
             }
         }, 2000L);
     }
