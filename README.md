@@ -3,7 +3,7 @@ LightTreads is designed to simplify using of threads in Android.  Enjoy using of
 
 ## How to
 
-To get **LightThreads** into your build:
+To get **LightThreads** into your project:
 
 ### Step 1
 
