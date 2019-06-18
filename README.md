@@ -61,4 +61,4 @@ LightThreads.schedule(new Runnable() {
 
 ### License
 
-The **LightThreads** is Open Source and available under the MIT license. See the LICENSE file for more info.
+The **LightThreads** is Open Source and available under the MIT license. See the LICENSE file for more information.
