@@ -23,7 +23,7 @@ Add the dependency:
 ```
 dependencies {
     ...
-    implementation 'com.github.CroogeADL:light-threads-android-java:1.0.1'
+    implementation 'com.github.CroogeADL:light-threads-android-java:1.0.2'
 }
 ```
 
