@@ -13,7 +13,7 @@ allprojects {
     repositories {
         ...
         maven { url 'https://jitpack.io' }
-   }
+    }
 }
 ```
 
@@ -23,7 +23,7 @@ Add the dependency:
 ```
 dependencies {
     ...
-    implementation 'com.github.CroogeADL:light-threads-android-java:1.0.0'
+    implementation 'com.github.CroogeADL:light-threads-android-java:1.0.1'
 }
 ```
 

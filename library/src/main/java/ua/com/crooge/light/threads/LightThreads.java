@@ -5,13 +5,13 @@ import android.os.Looper;
 import android.text.TextUtils;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
@@ -64,6 +64,7 @@ public final class LightThreads {
      *
      * @param task        command to run
      * @param delayMillis delay in milliseconds
+     * @return future for task
      */
     public static Future runInBackground(final Runnable task, final long delayMillis) {
         return SCHEDULED_EXECUTOR.schedule(task, delayMillis, TimeUnit.MILLISECONDS);
@@ -75,9 +76,9 @@ public final class LightThreads {
      * @param task  command to run
      * @param delay delay before executing task
      * @param unit  time unit
-     * @return future for task
+     * @return scheduled future for task
      */
-    public static Future schedule(final Runnable task, final long delay, final TimeUnit unit) {
+    public static ScheduledFuture schedule(final Runnable task, final long delay, final TimeUnit unit) {
         return SCHEDULED_EXECUTOR.schedule(task, delay, unit);
     }
 
@@ -88,9 +89,9 @@ public final class LightThreads {
      * @param delay  delay before executing task
      * @param period period between successive executions
      * @param unit   time unit
-     * @return future for task
+     * @return scheduled future for task
      */
-    public static Future schedule(final Runnable task, final long delay, final long period, final TimeUnit unit) {
+    public static ScheduledFuture schedule(final Runnable task, final long delay, final long period, final TimeUnit unit) {
         return SCHEDULED_EXECUTOR.scheduleAtFixedRate(task, delay, period, unit);
     }
 
@@ -177,46 +178,14 @@ public final class LightThreads {
     }
 
     private static abstract class CustomExecutor extends ThreadPoolExecutor {
-
         CustomExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue, DefaultThreadFactory threadFactory) {
             super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory);
-        }
-
-        @Override
-        public Future<?> submit(Runnable task) {
-            return super.submit(task);
-        }
-
-        @Override
-        public <T> Future<T> submit(Callable<T> task) {
-            return super.submit(task);
-        }
-
-        @Override
-        public <T> Future<T> submit(Runnable task, T result) {
-            return super.submit(task, result);
         }
     }
 
     private static abstract class CustomScheduledExecutor extends ScheduledThreadPoolExecutor {
-
         CustomScheduledExecutor(int corePoolSize, DefaultThreadFactory threadFactory) {
             super(corePoolSize, threadFactory);
-        }
-
-        @Override
-        public Future<?> submit(Runnable task) {
-            return super.submit(task);
-        }
-
-        @Override
-        public <T> Future<T> submit(Callable<T> task) {
-            return super.submit(task);
-        }
-
-        @Override
-        public <T> Future<T> submit(Runnable task, T result) {
-            return super.submit(task, result);
         }
     }
 
