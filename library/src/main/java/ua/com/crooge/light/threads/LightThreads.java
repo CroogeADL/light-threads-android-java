@@ -55,8 +55,9 @@ public final class LightThreads {
         if (immediately && !isUiThread()) {
             task.run();
             return null;
+        } else {
+            return RANDOM_THREAD_EXECUTOR.submit(task);
         }
-        return RANDOM_THREAD_EXECUTOR.submit(task);
     }
 
     /**
@@ -107,9 +108,9 @@ public final class LightThreads {
     public static void runInForeground(final Runnable task) {
         if (isUiThread()) {
             task.run();
-            return;
+        } else {
+            getMainHandler().post(task);
         }
-        getMainHandler().post(task);
     }
 
     /**
